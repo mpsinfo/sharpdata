@@ -166,7 +166,7 @@ namespace SharpData.Databases.SqlServer {
                     return "VARCHAR(MAX)";
                 case DbType.Binary: return "BINARY";
                 case DbType.Boolean: return "BIT";
-                case DbType.Byte: return "TINYINT UNSIGNED";
+                case DbType.Byte: return "TINYINT";
                 case DbType.Currency: return "MONEY";
                 case DbType.Date: return "DATE";
                 case DbType.DateTime: return "DATETIME";
