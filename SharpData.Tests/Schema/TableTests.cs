@@ -13,7 +13,7 @@ namespace Sharp.Tests.Data.Schema {
             var table = new Table("name");
             Assert.Equal("name", table.Name);
             Assert.NotNull(table.Columns);
-            Assert.Equal(0, table.Columns.Count);
+            Assert.Empty(table.Columns);
         }
     }
 }

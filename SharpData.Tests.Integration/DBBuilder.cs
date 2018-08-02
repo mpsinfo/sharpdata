@@ -2,7 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.Data.Common;
 using System.Data.SqlClient;
-using System.Data.SQLite;
+using Microsoft.Data.Sqlite;
 using MySql.Data.MySqlClient;
 using Npgsql;
 using SharpData.Databases;
@@ -19,7 +19,7 @@ namespace SharpData.Tests.Integration {
             AddFactoryOrNull(DbProviderType.OracleManaged, ConnectionStrings.Oracle, () => new OracleClientFactory());
             AddFactoryOrNull(DbProviderType.OracleOdp, ConnectionStrings.Oracle, () => new OracleDataAccess.OracleClientFactory());
             AddFactoryOrNull(DbProviderType.PostgreSql, ConnectionStrings.Postgre, () => NpgsqlFactory.Instance);
-            AddFactoryOrNull(DbProviderType.SqLite, ConnectionStrings.Sqlite, () => SQLiteFactory.Instance);
+            AddFactoryOrNull(DbProviderType.SqLite, ConnectionStrings.Sqlite, () => SqliteFactory.Instance);
         }
 
         public static void AddFactoryOrNull(DbProviderType dbProviderType, 
@@ -32,7 +32,7 @@ namespace SharpData.Tests.Integration {
             catch {
                 //sorry, continue the other tests
             }
-            _factories.Add(dbProviderType, new SharpFactory(factory, ConnectionStrings.SqlServer));
+            _factories.Add(dbProviderType, new SharpFactory(factory, connectionString));
         }
 
         public static IDataClient GetDataClient(DbProviderType databaseProvider) {

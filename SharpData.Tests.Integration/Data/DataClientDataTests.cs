@@ -32,8 +32,8 @@ namespace SharpData.Tests.Integration.Data {
             DataClient.Insert.Into("footable").Columns("colDate", "colBool").Values(now, true);
             var res = DataClient.Select.Columns("colDate", "colBool").From("footable").AllRows();
 
-            Assert.Equal(now.ToString(), res[0][0].ToString());
-            Assert.Equal(true, res[0][1]);
+            Assert.Equal(now, Convert.ToDateTime(res[0][0]));
+            Assert.True(Convert.ToBoolean(res[0][1]));
         }
 
         [Fact]
@@ -116,7 +116,7 @@ namespace SharpData.Tests.Integration.Data {
                                        .From(TableFoo)
                                        .SkipTake(1, 1);
 
-            Assert.Equal(1, res.Count);
+            Assert.Single(res);
             Assert.True(2 == Convert.ToInt32(res[0][0]));
         }
 
@@ -310,7 +310,7 @@ namespace SharpData.Tests.Integration.Data {
             ResultSet res = DataClient.Select.AllColumns().From(TableFoo).AllRows();
 
             Assert.Equal(3, num);
-            Assert.Equal(0, res.Count);
+            Assert.Empty(res);
         }
 
         [Fact]

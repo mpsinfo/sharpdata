@@ -41,7 +41,7 @@ namespace Sharp.Tests.Data {
 		[Fact]
 		public void Should_append_where_word() {
 			var whereSql = _whereBuilder.Build(_filter1);
-			Assert.True(whereSql.Contains(_wordWhere));
+			Assert.Contains(_wordWhere, whereSql);
 		}
 
 		[Fact]

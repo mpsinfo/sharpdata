@@ -1,5 +1,5 @@
-﻿using System.Data.SQLite;
-using System.IO;
+﻿using System.IO;
+using Microsoft.Data.Sqlite;
 using SharpData.Databases;
 using SharpData.Exceptions;
 using SharpData.Tests.Integration.Data;
@@ -12,7 +12,7 @@ namespace SharpData.Tests.Integration.SQLite {
             if (File.Exists(fileName)) {
                 File.Delete(fileName);
             }
-            SQLiteConnection.CreateFile(fileName);
+            //SqliteConnection.CreateFile(fileName);
         }
 
         protected override DbProviderType GetDataProviderName() {
@@ -22,8 +22,8 @@ namespace SharpData.Tests.Integration.SQLite {
         [Fact]
         public override void Can_insert_returning_id() {
             var ex = Assert.Throws<NotSupportedByDialectException>(() => { base.Can_insert_returning_id(); });
-            Assert.Equal(ex.DialectName, "SqLiteDialect");
-            Assert.Equal(ex.FunctionName, "GetInsertReturningColumnSql");
+            Assert.Equal("SqLiteDialect", ex.DialectName);
+            Assert.Equal("GetInsertReturningColumnSql", ex.FunctionName);
         }
 
         [Fact(Skip = "Not implemented. Pull requests welcome :)")]

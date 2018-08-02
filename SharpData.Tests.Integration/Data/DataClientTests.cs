@@ -60,7 +60,7 @@ namespace SharpData.Tests.Integration.Data {
             catch {}
         }
 
-        public void CleanTables() {
+        protected void CleanTables() {
             DropTable(TableFoo);
             DropTable("bar");
             DropTable("foobar");

@@ -1,4 +1,3 @@
-using System.Data.SQLite;
 using System.IO;
 using SharpData.Databases;
 using SharpData.Exceptions;
@@ -12,7 +11,7 @@ namespace SharpData.Tests.Integration.SQLite {
             if (File.Exists(fileName)) {
                 File.Delete(fileName);
             }
-            SQLiteConnection.CreateFile(fileName);
+            //SQLiteConnection.CreateFile(fileName);
         }
 
         protected override DbProviderType GetDataProviderName() {
@@ -26,8 +25,8 @@ namespace SharpData.Tests.Integration.SQLite {
                 Assert.True(false);
             }
             catch (NotSupportedByDialectException ex) {
-                Assert.Equal(ex.DialectName, "SqLiteDialect");
-                Assert.Equal(ex.FunctionName, "GetForeignKeySql");
+                Assert.Equal("SqLiteDialect", ex.DialectName);
+                Assert.Equal("GetForeignKeySql", ex.FunctionName);
             }
         }
 
@@ -38,8 +37,8 @@ namespace SharpData.Tests.Integration.SQLite {
                 Assert.True(false);
             }
             catch (NotSupportedByDialectException ex) {
-                Assert.Equal(ex.DialectName, "SqLiteDialect");
-                Assert.Equal(ex.FunctionName, "GetPrimaryKeySql");
+                Assert.Equal("SqLiteDialect", ex.DialectName);
+                Assert.Equal("GetPrimaryKeySql", ex.FunctionName);
             }
         }
 
@@ -50,8 +49,8 @@ namespace SharpData.Tests.Integration.SQLite {
                 Assert.True(false);
             }
             catch (NotSupportedByDialectException ex) {
-                Assert.Equal(ex.DialectName, "SqLiteDialect");
-                Assert.Equal(ex.FunctionName, "GetPrimaryKeySql");
+                Assert.Equal("SqLiteDialect", ex.DialectName);
+                Assert.Equal("GetPrimaryKeySql", ex.FunctionName);
             }
         }
 
@@ -62,8 +61,8 @@ namespace SharpData.Tests.Integration.SQLite {
                 Assert.True(false);
             }
             catch (NotSupportedByDialectException ex) {
-                Assert.Equal(ex.DialectName, "SqLiteDialect");
-                Assert.Equal(ex.FunctionName, "GetDropColumnSql");
+                Assert.Equal("SqLiteDialect", ex.DialectName);
+                Assert.Equal("GetDropColumnSql", ex.FunctionName);
             }
         }
 
@@ -75,8 +74,8 @@ namespace SharpData.Tests.Integration.SQLite {
                 Assert.True(false);
             }
             catch (NotSupportedByDialectException ex) {
-                Assert.Equal(ex.DialectName, "SqLiteDialect");
-                Assert.Equal(ex.FunctionName, "GetDropForeignKeySql");
+                Assert.Equal("SqLiteDialect", ex.DialectName);
+                Assert.Equal("GetDropForeignKeySql", ex.FunctionName);
             }
         }
     }
