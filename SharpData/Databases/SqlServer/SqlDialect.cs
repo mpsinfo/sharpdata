@@ -164,7 +164,10 @@ namespace SharpData.Databases.SqlServer {
                     if (precision <= 0) return "VARCHAR(255)";
                     if (precision.Between(1, 8000)) return String.Format("VARCHAR({0})", precision);
                     return "VARCHAR(MAX)";
-                case DbType.Binary: return "BINARY";
+                case DbType.Binary:
+                    if (precision <= 0) return "BINARY";
+                    if (precision.Between(1, 8000)) return String.Format("VARBINARY({0})", precision);
+                    return "VARBINARY(MAX)";
                 case DbType.Boolean: return "BIT";
                 case DbType.Byte: return "TINYINT";
                 case DbType.Currency: return "MONEY";
