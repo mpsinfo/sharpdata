@@ -175,7 +175,7 @@ namespace SharpData.Tests.Integration.Data {
         [Fact]
         public abstract void Can_call_stored_function_with_return_as_int();
 
-        public void CleanTables() {
+        protected void CleanTables() {
             if (DataClient.TableExists(TableFoo)) {
                 DataClient.Remove.Table(TableFoo);
             }
