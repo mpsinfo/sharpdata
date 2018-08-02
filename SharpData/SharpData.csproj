@@ -2,6 +2,7 @@
 
   <PropertyGroup>
     <TargetFramework>netstandard1.3</TargetFramework>
+    <LangVersion>7.1</LangVersion>
     <Version>2.1.1</Version>
     <Authors>Andre Carlucci</Authors>
     <Company>Andre Carlucci</Company>
@@ -11,10 +12,6 @@
     <PackageTags>orm, netstandard, migrations, .netcore, databases</PackageTags>
     <GeneratePackageOnBuild>True</GeneratePackageOnBuild>
     <PackageReleaseNotes></PackageReleaseNotes>
-  </PropertyGroup>
-
-  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
-    <LangVersion>7.1</LangVersion>
   </PropertyGroup>
 
   <ItemGroup>
