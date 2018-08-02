@@ -6,6 +6,6 @@ namespace SharpData.Databases.SqLite {
         }
 
         public override DbProviderType Name => DbProviderType.SqLite;
-        public override DatabaseKind DatabaseKind => DatabaseKind.Oracle;
+        public override DatabaseKind DatabaseKind => DatabaseKind.SqLite;
     }
 }
