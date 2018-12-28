@@ -53,7 +53,8 @@ namespace SharpData.Schema {
         public static FluentColumn Int64(string name) { return new FluentColumn(name, DbType.Int64); }
         public static FluentColumn Boolean(string name) { return new FluentColumn(name, DbType.Boolean); }
         public static FluentColumn Date(string name) { return new FluentColumn(name, DbType.Date); }
-        public static FluentColumn Decimal(string name) { return new FluentColumn(name, DbType.Decimal); }
+        public static FluentColumn DateTime(string name) { return new FluentColumn(name, DbType.DateTime); }
+        public static FluentColumn Decimal(string name, int precision = -1) { return new FluentColumn(name, DbType.Decimal, precision); }
         public static FluentColumn Single(string name) { return new FluentColumn(name, DbType.Single); }
         public static FluentColumn Double(string name) { return new FluentColumn(name, DbType.Double); }
         public static FluentColumn Guid(string name) { return new FluentColumn(name, DbType.Guid); }
