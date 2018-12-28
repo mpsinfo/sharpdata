@@ -173,6 +173,9 @@ namespace SharpData.Databases.SqlServer {
                 case DbType.Currency: return "MONEY";
                 case DbType.Date: return "DATE";
                 case DbType.DateTime: return "DATETIME";
+                case DbType.DateTime2:
+                    if (precision <= 0) return "DATETIME2";
+                    return String.Format("DATETIME2({0})", precision);
                 case DbType.Decimal:
                     if (precision <= 0) return "NUMERIC(19,5)";
                     return String.Format("NUMERIC(19,{0})", precision);
