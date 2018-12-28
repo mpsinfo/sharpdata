@@ -179,7 +179,7 @@ namespace SharpData.Databases.Oracle {
                 case DbType.DateTime2:
                     return "DATE";
                 case DbType.Decimal:
-                    if (precision <= 0) return "NUMBER(19,5)";
+                    if (precision < 0) return "NUMBER(19,5)";
                     return String.Format("NUMBER(19,{0})", precision);
                 case DbType.Double:
                     return "FLOAT";
