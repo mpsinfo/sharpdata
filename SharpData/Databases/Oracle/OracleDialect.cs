@@ -5,6 +5,7 @@ using System.Globalization;
 using System.Text;
 using SharpData.Exceptions;
 using SharpData.Schema;
+using SharpData.Util;
 
 namespace SharpData.Databases.Oracle {
     public class OracleDialect : Dialect {
@@ -155,10 +156,15 @@ namespace SharpData.Databases.Oracle {
         }
 
         protected override string GetDbTypeString(DbType type, int precision) {
+            // source: https://docs.oracle.com/cd/B19306_01/server.102/b14200/sql_elements001.htm#i54330
             switch (type) {
+                case DbType.AnsiStringFixedLength:
+                    if (precision <= 0) return "CHAR(255)";
+                    if (precision.Between(1, 4000)) return String.Format("CHAR({0})", precision);
+                    break;
                 case DbType.AnsiString:
-                    if (precision == 0) return "CHAR(255)";
-                    if (precision <= 4000) return "VARCHAR2(" + precision + ")";
+                    if (precision <= 0) return "VARCHAR2(255)";
+                    if (precision.Between(1, 4000)) return "VARCHAR2(" + precision + ")";
                     return "CLOB";
                 case DbType.Binary:
                     return "BLOB";
@@ -167,13 +173,14 @@ namespace SharpData.Databases.Oracle {
                 case DbType.Byte:
                     return "NUMBER(3)";
                 case DbType.Currency:
-                    return "NUMBER(19,1)";
+                    return "NUMBER(19,4)";
                 case DbType.Date:
-                    return "DATE";
                 case DbType.DateTime:
+                case DbType.DateTime2:
                     return "DATE";
                 case DbType.Decimal:
-                    return "NUMBER(19,5)";
+                    if (precision <= 0) return "NUMBER(19,5)";
+                    return String.Format("NUMBER(19,{0})", precision);
                 case DbType.Double:
                     return "FLOAT";
                 case DbType.Guid:
@@ -186,14 +193,18 @@ namespace SharpData.Databases.Oracle {
                     return "NUMBER(19)";
                 case DbType.Single:
                     return "FLOAT(24)";
+                case DbType.StringFixedLength:
+                    if (precision <= 0) return "NCHAR(255)";
+                    if (precision.Between(1, 4000)) return "NCHAR(" + precision + ")";
+                    return "NCLOB";
                 case DbType.String:
-                    if (precision == 0) return "VARCHAR2(255)";
-                    if (precision <= 4000) return "VARCHAR2(" + precision + ")";
-                    return "CLOB";
+                    if (precision <= 0) return "NVARCHAR2(255)";
+                    if (precision.Between(1, 4000)) return "NVARCHAR2(" + precision + ")";
+                    return "NCLOB";
                 case DbType.Time:
                     return "DATE";
             }
-            throw new DataTypeNotAvailableException(String.Format("The type {0} is no available for oracle", type));
+            throw new DataTypeNotAvailableException(String.Format("The type {0} with precision {1} is no available for oracle", type, precision));
         }
 
         public override DbType GetDbType(string sqlType, int dataPrecision) {
